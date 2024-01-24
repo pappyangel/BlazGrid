@@ -1,0 +1,35 @@
+@page "/qgridjv"
+@rendermode InteractiveAuto
+@* @using System.Text.Json *@
+@using Bogus
+@inject QDataService myBogusGridData
+
+<h1>Quick Grid Page Dependecy Injection of a Data Service</h1>
+<br />
+
+<input type="number" @bind="pageRowCount" />
+<input type="number" @bind="pageSeedKey" />
+<input type="button" class="btn btn-primary" @onclick="GenerateData" value="Generate Data" />
+<br />
+<br />
+
+<QuickGrid Items="@people">
+    <PropertyColumn Property="@(p => p.Id)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.FirstName)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.LastName)" Sortable="true" />
+    <PropertyColumn Property="@(p => p.StartDate)" Format="yyyy-MM-dd" Sortable="true" />
+</QuickGrid>
+
+@code {
+    private IQueryable<PersonClass>? people;
+    
+    public int pageRowCount = 25;
+    public int pageSeedKey = 1000;
+
+
+    private void GenerateData()
+    {
+        people = myBogusGridData.GetPeople(pageRowCount, pageSeedKey);
+
+    }
+}
