@@ -14,13 +14,13 @@
 
 @code {
     private record PersonRecord(int Id, string FirstName, string LastName, DateOnly StartDate);
-    private class PersonClass
+    @* private class PersonClass2
 {
     public int Id { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public DateTime StartDate { get; set; }
-}
+} *@
 
     @* private IQueryable<PersonRecord> people = new[]
 {

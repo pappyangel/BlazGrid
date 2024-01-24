@@ -9,3 +9,5 @@ dotnet add package Bogus --version 35.4.0
 dotnet remove package Bogus
 
 dotnet new console -o bfake 
+
+dotnet new classlib -o SharedLib

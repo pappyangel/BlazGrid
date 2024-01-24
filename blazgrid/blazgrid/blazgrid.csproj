@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharedLib\SharedLib.csproj" />   
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\blazgrid.Client\blazgrid.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 using blazgrid.Client.Pages;
 using blazgrid.Components;
+using SharedLib;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddSingleton<QDataService>();
 
 var app = builder.Build();
 

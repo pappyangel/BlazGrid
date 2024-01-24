@@ -14,6 +14,27 @@
             "cwd": "${workspaceFolder}/bfake",
             "stopAtEntry": false,
             "console": "internalConsole"
+        },
+        {
+            "name": "Grid",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildGrid",
+            "program": "${workspaceFolder}/blazgrid/blazgrid/bin/Debug/net8.0/blazgrid.dll",            
+            "args": [],
+            "cwd": "${workspaceFolder}/blazgrid/blazgrid",
+            "stopAtEntry": false,
+            // "serverReadyAction": {
+            //     "action": "openExternally",
+            //     "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            // },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "DOTNET_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
         }
      
 
