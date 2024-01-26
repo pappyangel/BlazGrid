@@ -1,0 +1,27 @@
+﻿@page "/tform"
+
+<h3>Bobo</h3>
+
+<EditForm Model="@myPerson" OnSubmit="@DoSomething" FormName="starship">
+    <InputText id="name" @bind-Value="myPerson.FirstName" />
+    <InputText id="age" @bind-Value="myPerson.LastName" />
+    <!-- Add more InputText components for other properties of PersonClass -->
+    <button type="submit">Submit</button>
+</EditForm>
+
+    
+
+@code {
+    [SupplyParameterFromForm]    
+    public PersonClass? myPerson { get; set; } = new();
+
+    @* protected override void OnInitialized() => myPerson ??= new(); *@
+    private void DoSomething()
+    {
+        Console.WriteLine("DoSomething");
+        Console.WriteLine(myPerson.FirstName + " " + myPerson.LastName);
+        // Tim will write this code later
+    }
+
+
+}
