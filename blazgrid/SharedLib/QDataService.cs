@@ -26,6 +26,7 @@ public class QDataService
             .RuleFor(u => u.FirstName, f => f.Name.FirstName())
             .RuleFor(u => u.LastName, f => f.Name.LastName())
             .RuleFor(u => u.StartDate, f => f.Date.Past(22, DateTime.Now))
+            .RuleFor(u => u.ImageUrl, f => f.Image.LoremFlickrUrl(320, 240, "people"))
             .Generate(rowCount);
 
         return testUsers.AsQueryable();

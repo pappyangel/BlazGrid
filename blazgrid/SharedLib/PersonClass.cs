@@ -6,6 +6,6 @@ public class PersonClass
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public DateTime StartDate { get; set; }
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
 
 }
