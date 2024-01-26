@@ -8,6 +8,12 @@ internal class Program
         Console.WriteLine($"{now}");
 
         var faker = new Faker();
+
+        var whatareyou = faker.Image.LoremFlickrUrl(320, 240, "people");
+        // var whatareyou = faker.Image.PicsumUrl(320, 240, "people");
+        
+        Console.WriteLine($"{whatareyou}");
+
         Console.WriteLine(faker.Date.Future(20));
         Console.WriteLine(faker.Date.Past(22, DateTime.Now));
         Console.WriteLine(faker.Date.Past(22));
