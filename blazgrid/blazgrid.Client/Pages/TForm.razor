@@ -3,7 +3,7 @@
 <h3>Bobo</h3>
 
 <EditForm Model="@myPerson" OnSubmit="@DoSomething" FormName="starship">
-    <InputText id="name" @bind-Value="myPerson.FirstName" />
+    <InputText id="name" @bind-Value="myPerson!.FirstName" />
     <InputText id="age" @bind-Value="myPerson.LastName" />
     <!-- Add more InputText components for other properties of PersonClass -->
     <button type="submit">Submit</button>
@@ -19,7 +19,7 @@
     private void DoSomething()
     {
         Console.WriteLine("DoSomething");
-        Console.WriteLine(myPerson.FirstName + " " + myPerson.LastName);
+        Console.WriteLine(myPerson!.FirstName + " " + myPerson.LastName);
         // Tim will write this code later
     }
 

@@ -1,0 +1,100 @@
+@page "/qgridVirt"
+@rendermode InteractiveAuto
+@inject QDataService myBogusGridData
+
+
+<style>
+    /* Fix height and enable scrolling */
+    .grid {
+        height: 25rem;
+        overflow-y: auto;
+    }
+
+    .grid ::deep table {
+        min-width: 100%;
+    }
+
+    /* Sticky header while scrolling */
+    ::deep thead {
+        position: sticky;
+        top: 0;
+        background-color: #d8d8d8;
+        outline: 1px solid gray;
+        z-index: 1;
+    }
+
+    /* For virtualized grids, it's essential that all rows have the same known height */
+    ::deep tr {
+        height: 30px;
+        border-bottom: 0.5px solid silver;
+    }
+
+    ::deep tbody td {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 0;
+        text-overflow: ellipsis;
+    }
+</style>
+
+
+<div class="grid" tabindex="-1">
+    <QuickGrid Items="@itemsQueryable" Virtualize="true" @ref="grid">
+        <PropertyColumn Property="@(p => p.Id)" Title="ID" Sortable="true" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn="true" />
+        <PropertyColumn Property="@(p => p.FirstName)" Title="First" Sortable="true" />
+        <PropertyColumn Property="@(p => p.LastName)" Title="Last" Sortable="true" />
+            @* <ColumnOptions>
+                <div class="search-box">
+                    <input type="search" autofocus @bind="nameSearch" @bind:event="oninput" placeholder="Product name..." />
+                </div>
+            </ColumnOptions> *@
+        <PropertyColumn Property="@(p => p.StartDate)" Title="Start Date" Format="yyyy-MM-dd" Sortable="true" />
+    </QuickGrid>
+</div>
+
+<div class="my-2">
+    <div class="search-box inline-block mr-4 my-1">
+        <input type="search" autofocus @bind="nameSearch" @bind:event="oninput"
+            @bind:after="()=>grid!.RefreshDataAsync()" placeholder="Product name..." />
+    </div>
+
+    <div class="inline-block my-1">
+        Total: <strong>@numResults results found</strong>
+    </div>
+</div>
+
+
+@code {
+    QuickGrid<PersonClass>? grid;
+    IQueryable<PersonClass>? itemsQueryable;
+    GridItemsProvider<PersonClass>? itemsProvider;
+    string nameSearch = "";
+    int numResults = 0;
+    @* GridSort<PersonClass> marketingStartSort = GridSort<PersonClass>.ByAscending(x => x.Marketing_Start_Date);
+    GridSort<PersonClass> marketingEndSort = GridSort<PersonClass>.ByAscending(x => x.Marketing_End_Date); *@
+
+
+    protected override void OnInitialized()
+    {
+        numResults = 500;
+        itemsQueryable = myBogusGridData.GetPeople(numResults, 1000);
+        StateHasChanged();
+
+        @* itemsProvider =  request =>
+        {
+            var result = Data.GetDrugInfoAsync(request, nameSearch);
+
+
+            // Separately display the item count
+            if (result.TotalItemCount != numResults && !request.CancellationToken.IsCancellationRequested)
+            {
+                numResults = result.TotalItemCount;
+                StateHasChanged();
+            }
+
+            return result;
+        }; *@
+    }
+}
+
+
