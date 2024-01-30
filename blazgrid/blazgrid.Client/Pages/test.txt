@@ -1,6 +1,8 @@
-The `itemsProvider` is of type `GridItemsProvider<PersonClass>`, which is a delegate that takes a `GridLoadDataArgs` parameter and returns a `GridLoadDataResult<PersonClass>`. 
+The `itemsProvider` is of type `GridItemsProvider<PersonClass>`, which is a delegate that takes a `GridLoadDataArgs` 
+parameter and returns a `GridLoadDataResult<PersonClass>`. 
 
-The `myBogusGridData.GetPeople` method returns an `IQueryable<PersonClass>`. To assign the results of `GetPeople` to `itemsProvider`, you need to create a new `GridItemsProvider<PersonClass>` delegate that calls `GetPeople` and wraps the results in a `GridLoadDataResult<PersonClass>`.
+The `myBogusGridData.GetPeople` method returns an `IQueryable<PersonClass>`. To assign the results of `GetPeople` to `itemsProvider`, you need to 
+create a new `GridItemsProvider<PersonClass>` delegate that calls `GetPeople` and wraps the results in a `GridLoadDataResult<PersonClass>`.
 
 Here's how you can do it:
 
@@ -27,4 +29,6 @@ Here's how you can do it:
 }
 ```
 
-In this code, `itemsProvider` is assigned a lambda function that takes a `GridLoadDataArgs` parameter (`request`). This function skips the items for the previous pages, takes the items for the current page, and returns them in a `GridLoadDataResult<PersonClass>`. The total number of items is passed as the second parameter to the `GridLoadDataResult<PersonClass>` constructor.
+In this code, `itemsProvider` is assigned a lambda function that takes a `GridLoadDataArgs` parameter (`request`). This function skips 
+the items for the previous pages, takes the items for the current page, and returns them in a `GridLoadDataResult<PersonClass>`. The total number
+ of items is passed as the second parameter to the `GridLoadDataResult<PersonClass>` constructor.
