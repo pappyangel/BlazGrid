@@ -22,6 +22,7 @@ internal class Program
         Console.WriteLine(faker.Date.Between(new DateTime(2022, 1, 1), new DateTime(2025, 1, 1)));
 
         List<PersonClass> people;
+       
         DateTime startDate = new DateTime(1995, 06, 26);
         DateTime endDate = DateTime.Now;
         int cat = 0;
@@ -35,7 +36,7 @@ internal class Program
             .RuleFor(u => u.LastName, f => f.Name.LastName())
             // .RuleFor(u => u.StartDate, f => f.Date.Between(startDate, endDate))
             .RuleFor(u => u.StartDate, f => f.Date.Past(22, DateTime.Now))
-            .Generate(5);
+            .Generate(10);
 
         people = testUsers;
 
@@ -45,6 +46,28 @@ internal class Program
         {
             Console.WriteLine($"{item.Id} {item.FirstName} {item.LastName} {item.StartDate}");
         }
+
+        IQueryable<PersonClass>? qPeople;
+        qPeople = testUsers.AsQueryable();
+        int page = 0;
+        int itemsPerPage = 2;
+        var items = qPeople
+                .Skip(page * itemsPerPage)
+                .Take(itemsPerPage)
+                .ToList();
+        page = 1;
+            items = qPeople
+                .Skip(page * itemsPerPage)
+                .Take(itemsPerPage)
+                .ToList();
+        page = 2;
+            items = qPeople
+                .Skip(page * itemsPerPage)
+                .Take(itemsPerPage)
+                .ToList();
+        page = 3;
+
+
     }
 }
 
